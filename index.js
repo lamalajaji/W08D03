@@ -21,8 +21,8 @@ app.use(usersRouter);
 
 
 ////// create a middleware for tasks router
-// const tasksRouter = require("./routers/routes/tasks");
-// app.use(tasksRouter);
+const tasksRouter = require("./routers/routes/tasks");
+app.use(tasksRouter);
 
 
 app.listen(PORT, () => {
