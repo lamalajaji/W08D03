@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 ////Create users Schema:
-const usersSchema = new mongoose.Schema({
+const tasksSchema = new mongoose.Schema({
   task: {
     type: String,
     required: true,
@@ -16,6 +16,6 @@ const usersSchema = new mongoose.Schema({
   },
 });
 
-const usersSchema = mongoose.model("Users", usersSchema);
+const tasksSchema = mongoose.model("Task", tasksSchema);
 
-module.exports = usersSchema;
+module.exports = tasksSchema;
