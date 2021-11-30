@@ -97,8 +97,37 @@ tasksModel
   });
 }
 
+////// delete task 
+const removeTask = (req , res)=> {
+  const { id } = req.params;
+tasksModel
+  .findOneAndUpdate(
+    {
+      _id: id,
+      user: req.token.id,
+      isCompleted: false,
+    },
+    { isCompleted : true}, {new : true}
+  )
+  .then((result) => {
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      res.status(404).json({ message: " There Is No Task To Remove!" });
+    }
+  })
+  .catch((err) => {
+    res.status(400).json(err);
+  });
+}
 
 
 
-
-module.exports = { addTask, getTodos, getTodo, getCompletedTodos, editTask };
+module.exports = {
+  addTask,
+  getTodos,
+  getTodo,
+  getCompletedTodos,
+  editTask,
+  removeTask,
+};
