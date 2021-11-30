@@ -74,4 +74,18 @@ const getAllUsers = (req, res) => {
     });
 };
 
-module.exports = { signUp, login, getAllUsers };
+////// delete users function : 
+const deleteUser = (req, res) => {
+    const {id} = req.params;
+
+  usersModel
+    .findOneAndDelete({ _id: id })
+    .then(() => {
+      res.send("this user has been removed!");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+module.exports = { signUp, login, getAllUsers, deleteUser };
