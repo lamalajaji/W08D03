@@ -73,6 +73,32 @@ tasksModel
   });
 }
 
+////// edit function 
+const editTask = (req ,res) =>{ 
+const {id} = req.params;
+const task = req.body; 
 
 
-module.exports = { addTask, getTodos, getTodo, getCompletedTodos };
+tasksModel
+  .findOneAndUpdate({
+    _id: id,
+    task,
+    isCompleted: false,
+  })
+  .then((result) => {
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      res.status(404).json({ message: " There Is No Task To Edit !" });
+    }
+  })
+  .catch((err) => {
+    res.status(400).json(err);
+  });
+}
+
+
+
+
+
+module.exports = { addTask, getTodos, getTodo, getCompletedTodos, editTask };
