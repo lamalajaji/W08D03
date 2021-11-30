@@ -15,9 +15,9 @@ PORT = process.env.PORT || 4000;
 const rolesRouter = require("./routers/routes/roles");
 app.use(rolesRouter);
 
-////// create a middleware for users router
-// const usersRouter = require("./routers/routes/users");
-// app.use(usersRouter);
+//// create a middleware for users router
+const usersRouter = require("./routers/routes/users");
+app.use(usersRouter);
 
 
 ////// create a middleware for tasks router
