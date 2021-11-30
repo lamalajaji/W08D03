@@ -1,15 +1,12 @@
 const tasksModel = require("./../../db/models/tasks");
 
-
-///// add task funstion 
+///// add task funstion
 const addTask = (req, res) => {
-
-const { id } = req.params;
-  const task = req.body.task;
+  const task = req.body;
 
   const neweTask = new tasksModel({
     task,
-    user: req.id,
+    user: req.token.id,
   });
 
   neweTask
@@ -23,9 +20,28 @@ const { id } = req.params;
     .catch((err) => {
       res.status(400).json(err);
     });
-  
 };
 
+////// get user's task function :
+const getTodos = (req, res) => {
 
-module.exports = { addTask };
+tasksModel
+  .find({  user: req.token.id, isCompleted: false })
+  .then((result) => {
+    if (result) {
+      res.sattus(200).json(result);
+    } else {
+      res.status(404).json({ message: "There Is No Tasks !" });
+    }
+  })
+  .catch((err) => {
+    res.status(400).json(err);
+  });
+  
+  }
 
+  
+  
+
+
+module.exports = { addTask, getTodos };

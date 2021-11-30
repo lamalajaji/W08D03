@@ -41,19 +41,21 @@ const login = (req, res) => {
           const savedPassword = await bcrypt.compare(passowrd, result.passowrd);
           const payload = {
             email,
+            role : result.role,
+            
           };
 
           if (savedPassword) {
             let token = jwt.sign(payload, Secret);
             res.status(200).json({ result, token });
           } else {
-            res.status(400).json("Wrong email or password");
+            res.status(400).json("Wrong email or password!");
           }
         } else {
-          res.status(400).json("Wrong email or password");
+          res.status(400).json("Wrong email or password!");
         }
       } else {
-        res.status(404).json("Email not exist");
+        res.status(404).json("Email does not exist!");
       }
     })
     .catch((err) => {
@@ -82,6 +84,7 @@ const deleteUser = (req, res) => {
     .findOneAndDelete({ _id: id })
     .then(() => {
       res.send("this user has been removed!");
+     
     })
     .catch((err) => {
       res.send(err);
