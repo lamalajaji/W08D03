@@ -24,24 +24,36 @@ const addTask = (req, res) => {
 
 ////// get user's task function :
 const getTodos = (req, res) => {
-
-tasksModel
-  .find({  user: req.token.id, isCompleted: false })
-  .then((result) => {
-    if (result) {
-      res.sattus(200).json(result);
-    } else {
-      res.status(404).json({ message: "There Is No Tasks !" });
-    }
-  })
-  .catch((err) => {
-    res.status(400).json(err);
-  });
-  
-  }
-
-  
-  
+  tasksModel
+    .find({ user: req.token.id, isCompleted: false })
+    .then((result) => {
+      if (result) {
+        res.sattus(200).json(result);
+      } else {
+        res.status(404).json({ message: "There Is No Tasks !" });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
 
 
-module.exports = { addTask, getTodos };
+/////get a task function
+const getTodo = (req, res) => {
+  const { id } = req.params;
+  tasksModel
+    .findOne({ _id: id, user: req.token.id, isCompleted: false })
+    .then((result) => {
+      if (result) {
+        res.sattus(200).json(result);
+      } else {
+        res.status(404).json({ message: "There Is No Task  !" });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+
+module.exports = { addTask, getTodos, getTodo };
