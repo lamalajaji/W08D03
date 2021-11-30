@@ -56,4 +56,23 @@ const getTodo = (req, res) => {
     });
 };
 
-module.exports = { addTask, getTodos, getTodo };
+
+////// here isCompletes == deleted tasks i just forgot to name it "deleted" 
+const getCompletedTodos = (req , res) =>{
+tasksModel
+  .find({ user: req.token.id, isCompleted: true })
+  .then((result) => {
+    if (result) {
+      res.sattus(200).json(result);
+    } else {
+      res.status(404).json({ message: "There Is No Deleted Task  !" });
+    }
+  })
+  .catch((err) => {
+    res.status(400).json(err);
+  });
+}
+
+
+
+module.exports = { addTask, getTodos, getTodo, getCompletedTodos };
