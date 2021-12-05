@@ -21,7 +21,7 @@ const signUp = async (req, res) => {
   newUSer
     .save()
     .then((result) => {
-      result.status(201).json(result);
+      res.status(201).json(result);
     })
     .catch((err) => {
       res.status(400).json(err);
@@ -42,12 +42,14 @@ const login = (req, res) => {
           const payload = {
             email,
             role : result.role,
+            id : result._id
             
           };
 
           if (savedPassword) {
             let token = jwt.sign(payload, Secret);
             res.status(200).json({ result, token });
+            console.log(payload);
           } else {
             res.status(400).json("Wrong email or password!");
           }

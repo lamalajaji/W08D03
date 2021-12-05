@@ -3,11 +3,13 @@ require("dotenv").config();
 const app = express();
 const db = require("./db");
 const morgan = require("morgan");
+const cors = require("cors");
 
 /// app Level Middleware
 app.use(express.json());
 ///// morgan middleware
 app.use(morgan("dev"));
+app.use(cors());
 
 PORT = process.env.PORT || 4000;
 
@@ -19,11 +21,9 @@ app.use(rolesRouter);
 const usersRouter = require("./routers/routes/users");
 app.use(usersRouter);
 
-
 ////// create a middleware for tasks router
 const tasksRouter = require("./routers/routes/tasks");
 app.use(tasksRouter);
-
 
 app.listen(PORT, () => {
   console.log(`Server Started On ${PORT}`);

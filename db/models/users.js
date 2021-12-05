@@ -14,7 +14,8 @@ const usersSchema = new mongoose.Schema({
   role: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Role",
-  }
+    default: "61a6013d6215cdf69f4f70bf",
+  },
 });
 
 const userSchema = mongoose.model("User", usersSchema);

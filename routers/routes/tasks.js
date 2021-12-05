@@ -14,10 +14,10 @@ const {
 
 
 tasksRouter.post("/task",authentication, addTask);
-tasksRouter.get("/todos/:id", authentication, getTodos);
-tasksRouter.get("/todo/:id", authentication, getTodo);
-tasksRouter.get("/completed/:id", authentication, getCompletedTodos);
-tasksRouter.put("/edit/:id", authentication, editTask);
-tasksRouter.delete("/todo/:id", authentication, removeTask);
+tasksRouter.get("/todos", authentication, getTodos);
+tasksRouter.get("/todo/:id", authentication,  getTodo);
+tasksRouter.get("/completed", authentication, getCompletedTodos);
+tasksRouter.put("/edit/:id", authentication,  editTask);
+tasksRouter.put("/todo/:id", authentication,  removeTask);
 
 module.exports =  tasksRouter ;
