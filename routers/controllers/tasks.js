@@ -45,7 +45,7 @@ const getTodo = (req, res) => {
     .findOne({ _id: id, user: req.token.id, isCompleted: false })
     .then((result) => {
       if (result) {
-        res.sattus(200).json(result);
+        res.status(200).json(result);
       } else {
         res.status(404).json({ message: "There Is No Task  !" });
       }
@@ -75,6 +75,7 @@ const getCompletedTodos = (req, res) => {
 const editTask = (req, res) => {
   const { id } = req.params;
   const task = req.body.task;
+  const isCom = req.body.isCom;
 
   tasksModel
     .findOneAndUpdate(
@@ -83,7 +84,7 @@ const editTask = (req, res) => {
         user: req.token.id,
         isCompleted: false,
       },
-      { task: task },
+      { task: task, isCompleted: isCom },
       { new: true }
     )
     .then((result) => {

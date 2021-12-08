@@ -4,11 +4,11 @@ const authorization = async (req , res , next) =>{
     try {
 
         const roleId = req.token.role;
-        const result = await rolesModel.findById({ roleId })
+        const result = await rolesModel.findById({ _id : roleId })
             if (result.role == "Admin"){
                 next();
             } else{
-                res.status(403).json({ message: "Forbidden" });
+                res.status(403).send({ message: "Forbidden" });
             }
         
     } catch (err) {

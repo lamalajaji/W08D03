@@ -71,10 +71,11 @@ const getAllUsers = (req, res) => {
   usersModel
     .find({})
     .then((result) => {
-      res.send(result);
+      
+      res.status(200).json(result);
     })
     .catch((err) => {
-      res.send(err);
+      res.status(400).json(err);
     });
 };
 
@@ -85,11 +86,11 @@ const deleteUser = (req, res) => {
   usersModel
     .findOneAndDelete({ _id: id })
     .then(() => {
-      res.send("this user has been removed!");
+      res.status(200).send("this user has been removed!");
      
     })
     .catch((err) => {
-      res.send(err);
+      res.status(400).send(err);
     });
 };
 
